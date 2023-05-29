@@ -16,15 +16,6 @@ public enum HTTPMethodType: String {
     case delete  = "DELETE"
 }
 
-public enum Encoding {
-    case jsonSerializationData
-}
-
-public class Bas<E> {
-    public let endpoint = ""
-    
-}
-
 public class Endpoint<R>: ResponseRequestable {
     
     public typealias Response = R
@@ -34,8 +25,6 @@ public class Endpoint<R>: ResponseRequestable {
     public let body: Data?
     public var headerParamaters: [String: String]
     public let queryParametersEncodable: Encodable?
-    public let queryParameters: [String: Any]
-    public let queryEncoding: Encoding
     public let responseDecoder: ResponseDecoder
     
     init(path: String,
@@ -44,15 +33,12 @@ public class Endpoint<R>: ResponseRequestable {
          headerParamaters: [String: String] = [:],
          queryParametersEncodable: Encodable? = nil,
          queryParameters: [String: Any] = [:],
-         queryEncoding: Encoding = .jsonSerializationData,
          responseDecoder: ResponseDecoder = JSONResponseDecoder()) {
         self.path = path
         self.method = method
         self.body = body
         self.headerParamaters = headerParamaters
         self.queryParametersEncodable = queryParametersEncodable
-        self.queryParameters = queryParameters
-        self.queryEncoding = queryEncoding
         self.responseDecoder = responseDecoder
     }
 }
@@ -63,10 +49,7 @@ public protocol Requestable {
     var body: Data? { get }
     var headerParamaters: [String: String] { set get }
     var queryParametersEncodable: Encodable? { get }
-    var queryParameters: [String: Any] { get }
-    var queryEncoding: Encoding { get }
 
-    
     func urlRequest(with networkConfig: NetworkConfigurable) throws -> URLRequest
 }
 
@@ -84,26 +67,16 @@ extension Requestable {
     
     func url(with config: NetworkConfigurable) throws -> URL {
 
-        var endpoint = config.baseURL.absoluteString + path
-        
-        print(endpoint)
-        
+        let endpoint = config.baseURL.absoluteString + path
+                
         guard var urlComponents = URLComponents(string: endpoint) else { throw RequestGenerationError.components }
         var urlQueryItems = [URLQueryItem]()
 
-        let queryParameters = try queryParametersEncodable?.toDictionary() ?? self.queryParameters
+        let queryParameters = try queryParametersEncodable?.toDictionary() ?? [:]
         queryParameters.forEach {
-            if ($0.value is [String]) {
-                urlQueryItems.append(URLQueryItem(name: $0.key, value: ($0.value as! [String]).joined(separator: ",")))
-            }
-            else {
-                urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
-            }
+            urlQueryItems.append(URLQueryItem(name: $0.key, value: "\($0.value)"))
         }
                 
-        config.queryParameters.forEach {
-            urlQueryItems.append(URLQueryItem(name: $0.key, value: $0.value))
-        }
         urlComponents.queryItems = !urlQueryItems.isEmpty ? urlQueryItems : nil
         guard let url = urlComponents.url else { throw RequestGenerationError.components }
         return url
@@ -121,14 +94,6 @@ extension Requestable {
         return urlRequest
     }
     
-}
-
-private extension Dictionary {
-    var queryString: String {
-        return self.map { "\($0.key)=\($0.value)" }
-            .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed) ?? ""
-    }
 }
 
 private extension Encodable {
