@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iXD-56-x3r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Fruit List View Controller-->
+        <scene sceneID="zjP-nl-FMe">
+            <objects>
+                <tableViewController id="iXD-56-x3r" customClass="FruitListViewController" customModule="Fruits" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="jBa-Kf-6cY">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FruitListTableViewCell" id="1tQ-qk-ldz" customClass="FruitListTableViewCell" customModule="Fruits" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="46.333332061767578"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1tQ-qk-ldz" id="ZpM-ba-TWq">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="46.333332061767578"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIj-eu-RnD">
+                                            <rect key="frame" x="20.000000000000004" y="10.999999999999998" width="52.333333333333343" height="24.333333333333329"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tIj-eu-RnD" firstAttribute="top" secondItem="ZpM-ba-TWq" secondAttribute="topMargin" id="D2i-9O-kfk"/>
+                                        <constraint firstItem="tIj-eu-RnD" firstAttribute="leading" secondItem="ZpM-ba-TWq" secondAttribute="leadingMargin" id="emN-lD-iGG"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="tIj-eu-RnD" secondAttribute="bottom" id="phC-Tl-S3e"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="tIj-eu-RnD" id="q9q-w7-Al2"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iXD-56-x3r" id="Rih-si-X8w"/>
+                            <outlet property="delegate" destination="iXD-56-x3r" id="0P6-1T-Ra4"/>
+                        </connections>
+                    </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="N3T-Oo-ORY">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshControlValueChanged:" destination="iXD-56-x3r" eventType="valueChanged" id="kKx-Dl-aZe"/>
+                        </connections>
+                    </refreshControl>
+                    <connections>
+                        <segue destination="kPL-XX-g4v" kind="show" identifier="FruitItemViewController" id="mZA-00-YLF"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v1T-ic-BN0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="144" y="16"/>
+        </scene>
+        <!--Fruit Item View Controller-->
+        <scene sceneID="gXP-nS-2Ra">
+            <objects>
+                <viewController id="mmG-0X-Roq" customClass="FruitItemViewController" customModule="Fruits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jgk-Pa-DxP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Haa-Z1-N66">
+                                <rect key="frame" x="40" y="116" width="52.333333333333343" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTA-Bg-bJt">
+                                <rect key="frame" x="40" y="142" width="49" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8s-6Z-NRZ">
+                                <rect key="frame" x="40" y="168" width="49" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ldf-WT-psk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BTA-Bg-bJt" firstAttribute="top" secondItem="Haa-Z1-N66" secondAttribute="bottom" constant="2" id="Osg-g6-D6r"/>
+                            <constraint firstItem="Haa-Z1-N66" firstAttribute="leading" secondItem="Ldf-WT-psk" secondAttribute="leading" constant="40" id="Ubs-df-c1B"/>
+                            <constraint firstItem="Haa-Z1-N66" firstAttribute="top" secondItem="Ldf-WT-psk" secondAttribute="top" constant="60" id="W4Z-tn-jL7"/>
+                            <constraint firstItem="W8s-6Z-NRZ" firstAttribute="top" secondItem="BTA-Bg-bJt" secondAttribute="bottom" constant="2" id="ce3-Hm-lFj"/>
+                            <constraint firstItem="W8s-6Z-NRZ" firstAttribute="leading" secondItem="Ldf-WT-psk" secondAttribute="leading" constant="40" id="iXp-CF-jnJ"/>
+                            <constraint firstItem="BTA-Bg-bJt" firstAttribute="leading" secondItem="Ldf-WT-psk" secondAttribute="leading" constant="40" id="zto-xT-cvq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vZE-MX-rvY"/>
+                    <connections>
+                        <outlet property="priceLabel" destination="BTA-Bg-bJt" id="q7P-Em-OGM"/>
+                        <outlet property="typeLabel" destination="Haa-Z1-N66" id="seX-G8-2bh"/>
+                        <outlet property="weightLabel" destination="W8s-6Z-NRZ" id="EiT-1V-Ahb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gfc-Jr-ovS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2324" y="15"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="v7E-DF-mjq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kPL-XX-g4v" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="nwe-sG-xRp"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S3R-9t-B8G">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mmG-0X-Roq" kind="relationship" relationship="rootViewController" id="k7I-ty-Kkq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qrf-cM-Xrt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1398" y="15"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
